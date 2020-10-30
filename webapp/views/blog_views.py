@@ -1,19 +1,15 @@
-import time
-
 from rest_framework import status
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from django.shortcuts import get_object_or_404
+from django.core.exceptions import ValidationError;
 
 from webapp.serializers.blog_serializers import PostSerializer
 from webapp.models.blog import Post
 
 
 class PostViewset(ViewSet):
-
-  authentication_classes = ()
-  permission_classes = ()
 
   def list(self, request):
 
@@ -30,8 +26,12 @@ class PostViewset(ViewSet):
   def retrieve(self, request, pk=None):
 
     posts = Post.objects.all()
-    post = get_object_or_404(posts, pk=pk)
-    
+
+    try:
+      post = get_object_or_404(posts, pk=pk)
+    except ValidationError:
+      return Response(status=status.HTTP_400_BAD_REQUEST)
+
     serializer = PostSerializer(post)
 
     return Response(serializer.data)

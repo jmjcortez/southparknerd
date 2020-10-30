@@ -1,3 +1,4 @@
+import uuid
 from django import urls
 from datetime import datetime, timedelta
 
@@ -39,11 +40,11 @@ class PostViewsetTest(APITestCase):
 
     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-  def test_view_retrieve_returns_404_if_object_doesnt_exits(self):
+  def test_view_retrieve_returns_400_if_not_uid(self):
   
     response = self.client.get("{}{}/".format(self.url, 0))
 
-    self.assertEqual(response.status_code, status.HTTP_404_NOT_FOUND)
+    self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
   def test_view_retrieve_returns_data(self):
   
@@ -51,11 +52,11 @@ class PostViewsetTest(APITestCase):
 
     response = self.client.get("{}{}/".format(self.url, post.id))
 
-    self.assertEqual(response.data['id'], post.id)
+    self.assertEqual(response.data['id'], str(post.id))
 
   def test_latest_post_returns_latest_post(self):
 
     post1 = PostFactory(date_posted=datetime.now() - timedelta(days=1))
     post2 = PostFactory(date_posted=datetime.now())
 
-    self.assertEqual(post2.id, PostViewset._get_latest_post().id)
+    self.assertEqual(str(post2.id), str(PostViewset._get_latest_post().id))
