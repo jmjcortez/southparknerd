@@ -40,5 +40,5 @@ class EpisodeViewset(ViewSet):
       data = serializer.data
     else:
       data = {}
-      
+
     return Response(status=status.HTTP_200_OK, data=data) 
