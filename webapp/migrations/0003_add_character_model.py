@@ -6,7 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('webapp', '0001_blog_models'),
+        ('webapp', '0002_change_id_field'),
     ]
 
     operations = [
