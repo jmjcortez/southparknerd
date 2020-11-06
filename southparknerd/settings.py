@@ -27,6 +27,8 @@ DEBUG = False
 
 ALLOWED_HOSTS = [
     'https://southparknerd.herokuapp.com/',
+    'localhost',
+    '127.0.0.1',
 ]
 
 
@@ -128,6 +130,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-import django_heroku
-django_heroku.settings(locals())
-# DEBUG = True
+# import django_heroku
+# django_heroku.settings(locals())
+DEBUG = True
