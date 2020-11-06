@@ -3,7 +3,7 @@
 from django.db import migrations
 from webapp.models.episode import Episode
 
-def insert_episodes():
+def insert_episodes(apps, schema_editor):
     Episode.objects.create(episode_number=4,title='Cancelled',screenshot_url='https://static.wikia.nocookie.net/southpark/images/e/e6/Cancelled15.jpg/revision/latest?cb=20150515223918', season=7, synopsis='The boys learn that Earth is a reality show for aliens and must save it from cancellation.', rating=7)
     Episode.objects.create(episode_number=2,title='Krazy Kripples',screenshot_url='https://static.wikia.nocookie.net/southpark/images/8/8a/702_image_17.jpg/revision/latest?cb=20061016225724', season=7, synopsis='Timmy and Jimmy start a club for cripples. Christopher Reeve comes to town to promote stem cell research.', rating=7)
     Episode.objects.create(episode_number=3,title='Toilet Paper',screenshot_url='https://static.wikia.nocookie.net/southpark/images/6/61/Toilet_Paiper_HD.png/revision/latest?cb=20120630131429', season=7, synopsis='Kyle feels guilty after he and the boys TP their art teacher\'s house.', rating=7)
@@ -28,4 +28,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(insert_episodes)
     ]
