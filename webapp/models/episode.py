@@ -17,8 +17,7 @@ class EpisodeManager(models.Manager):
       q = q.filter(season__in=seasons)
 
     if is_classic:
-      # get top 30 percentile so order by tapos top 30 or %10 ng total
-      q = q.filter(rating__gte=9.0)    
+      q = q.filter(rating__gte=8.8)    
 
     return q
 
